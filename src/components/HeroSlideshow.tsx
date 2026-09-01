@@ -10,14 +10,17 @@ import { useEffect, useReducer } from "react";
  * crop: true`, i.e. each photo holds for 3s then cross-fades over 1s, cropped
  * to cover the band.
  *
- * Height comes from a UABB spacer (node 601c4ea5bd485): 500px desktop /
- * 400px tablet / 200px phone, plus the module's 20px margins and the row's
- * 20px padding — 580 / 480 / 280px in total.
+ * `children` render bottom-anchored *inside* the hero, which is where the blue
+ * mission band now sits. It is a normal flow child rather than an absolute
+ * overlay, so on narrow screens it grows past the minimum height instead of
+ * spilling out of it.
  *
- * `children` render bottom-anchored *inside* that area, which is where the
- * blue mission band now sits. It is a normal flow child rather than an
- * absolute overlay, so on narrow screens it can grow past the minimum height
- * instead of spilling out of it.
+ * Heights are 830 / 690 / 400px (desktop / ≤992px / ≤768px) at the client's
+ * request — taller than the original's 580 / 480 / 280, which came from a UABB
+ * spacer (node 601c4ea5bd485) of 500 / 400 / 200 plus 40px of module and row
+ * spacing. The smaller two are scaled from 830 to keep the same proportions.
+ * All three are minimums: the band can push the hero taller when its copy
+ * wraps, which it does on phones.
  */
 
 const SLIDES = [
@@ -74,7 +77,7 @@ export function HeroSlideshow({ children }: { children?: React.ReactNode }) {
         aria-hidden="true"
       />
 
-      <div className="relative flex min-h-[580px] flex-col justify-end max-[992px]:min-h-[480px] max-md:min-h-[280px]">
+      <div className="relative flex min-h-[830px] flex-col justify-end max-[992px]:min-h-[690px] max-md:min-h-[400px]">
         {children}
       </div>
     </section>

@@ -137,6 +137,8 @@ Requested after the first pass, so they will not match the live site:
 - **The mission band sits inside the hero**, bottom-anchored over the slideshow, rather than
   as a separate band below it. It is a flow child, not an absolute overlay, so on narrow
   screens it grows past the hero's minimum height instead of spilling out.
+- **The hero is 830px tall** (690px at ≤992px, 400px at ≤768px), against the original's
+  580 / 480 / 280. These are minimums — the band pushes the hero taller when its copy wraps.
 - **The header is 12px shorter** — 12px of vertical padding instead of the original's 20px.
 - **The JOIN TODAY button no longer overlaps the mission text.** The original computes a
   10px overlap (the paragraph's bottom margin is zeroed while the button's module has
