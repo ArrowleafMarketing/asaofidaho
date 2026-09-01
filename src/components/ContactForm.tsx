@@ -2,6 +2,8 @@
 
 import { useId, useState } from "react";
 
+import { site } from "@/lib/site";
+
 /**
  * Replacement for the HappyForms form (`happyforms-135`) in the blue contact
  * column on the homepage. Same fields, same order, same labels, same honeypot;
@@ -93,8 +95,7 @@ export function ContactForm() {
     } catch {
       setStatus({
         state: "error",
-        message:
-          "We could not reach the server. Please try again, or call 208-921-4546.",
+        message: `We could not reach the server. Please try again, or email ${site.email}.`,
       });
     }
   }

@@ -68,11 +68,9 @@ export function Footer() {
           {/* uabb-button e9ns57hf4ucd — 35px bottom margin, 20px on phones */}
           <div className="mx-5 mt-0 mb-[35px] text-center max-md:mb-5">
             <a
-              href={site.contactUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Click Here"
-              aria-label="Contact Us"
+              href={`mailto:${site.email}`}
+              title={`Email ${site.email}`}
+              aria-label={`Contact Us — email ${site.email}`}
               className="btn-contact"
             >
               <span>Contact Us</span>

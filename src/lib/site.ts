@@ -16,13 +16,18 @@ export const site = {
     alt: "ASA of Idaho",
   },
   phone: "208-921-4546",
+  /**
+   * Public contact address. Used by the footer's CONTACT US button and, unless
+   * CONTACT_TO_EMAIL overrides it, as the destination for contact-form
+   * submissions.
+   */
+  email: "asaofidaho@gmail.com",
   executiveDirector: {
     name: "Jenae Sexton",
     title: "Executive Director",
   },
   /** External membership signup, opened in a new tab from the nav and hero. */
   joinUrl: "https://members.asaonline.com/join-idaho?id=M4rkZ3L5",
-  contactUrl: "https://www.subcontractorsidaho.com/contact",
   copyright:
     "Copyright © 2024 - American Subcontractors Association of Idaho. All rights reserved.",
 } as const;

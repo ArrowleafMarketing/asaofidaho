@@ -24,9 +24,10 @@ npm run lint
 | `/why-join`      | Why Join (post 24)         | Member-benefits copy                                    |
 | `/api/contact`   | HappyForms form 135        | Replaces `admin-ajax.php`                               |
 
-Four nav items are external and unchanged: **Join Today** (members.asaonline.com),
-**Advocacy** (a Google Doc), **Register for Events** (Constant Contact), and the footer's
-**Contact Us** (subcontractorsidaho.com).
+Three nav items are external and unchanged: **Join Today** (members.asaonline.com),
+**Advocacy** (a Google Doc) and **Register for Events** (Constant Contact). The footer's
+**Contact Us** button is now a `mailto:` to `asaofidaho@gmail.com`, replacing the original's
+link to subcontractorsidaho.com.
 
 ### Layout
 
@@ -103,17 +104,32 @@ back to `scroll` on touch devices instead of jumping.
 
 ## Needs a decision before launch
 
-**1. The contact form isn't connected to an inbox.** The endpoint validates, blocks the
-honeypot, and forwards to whatever you point it at — but nothing is configured, so it
-currently returns a clear "not connected yet" error rather than silently dropping messages.
+**1. The contact form needs an email provider.** Enquiries go to `asaofidaho@gmail.com`
+(set in [site.ts](src/lib/site.ts), overridable with `CONTACT_TO_EMAIL`). The endpoint
+validates, blocks the honeypot and sends — but no provider is configured yet, so it
+currently returns an explicit "not connected yet" error rather than silently dropping
+messages. See [.env.example](.env.example) for the full list.
+
+_Recommended — Resend._ Sends the email directly, no dependency to install:
 
 ```bash
-CONTACT_WEBHOOK_URL=https://…   # Zapier, Make, Formspree, or an SMTP function
+RESEND_API_KEY=re_…
+CONTACT_FROM_EMAIL=website@asaofidaho.com
 ```
 
-Any endpoint that accepts a JSON `POST` works. It receives `{name, email, phone, company,
-message, source, receivedAt}`. If you'd rather send mail directly (Resend, Postmark, SES),
-that's a small change in [route.ts](src/app/api/contact/route.ts).
+**The sending domain has to be verified with Resend.** Use `asaofidaho.com`, which the
+association already owns — you cannot send *from* a `gmail.com` address, only *to* one.
+That means adding the DKIM/SPF records Resend gives you to the domain's DNS. The email's
+`Reply-To` is set to the enquirer, so hitting Reply in the inbox answers them directly.
+
+_Alternative — a webhook._ Skips DNS setup at the cost of another service in the chain:
+
+```bash
+CONTACT_WEBHOOK_URL=https://hooks.zapier.com/…
+```
+
+Zapier, Make or Formspree all work; the endpoint receives `{name, email, phone, company,
+message, to, source, receivedAt}` as JSON and you build the "send email" step there.
 
 The original also ran reCAPTCHA v3. The site key is public but the secret isn't, so it
 couldn't be carried over. The honeypot is in place; add reCAPTCHA or Turnstile if spam
