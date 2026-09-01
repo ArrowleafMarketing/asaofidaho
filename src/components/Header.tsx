@@ -185,7 +185,9 @@ export function Header({ variant }: { variant: Variant }) {
         }
       >
         <header className={headerWash} id="masthead" aria-label="Site">
-          <div className="mx-auto flex max-w-(--container-page) items-center px-10 py-5">
+          {/* 12px of vertical padding rather than the original's 20px, at the
+              client's request, to bring the header height down a little. */}
+          <div className="mx-auto flex max-w-(--container-page) items-center px-10 py-3">
             <Link href="/" rel="home" className="inline-block max-w-full">
               <Image
                 src={site.logo.src}

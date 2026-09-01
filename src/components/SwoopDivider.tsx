@@ -1,13 +1,24 @@
 /**
  * Beaver Builder's "swoop2" row shape, reproduced path-for-path.
  *
- * On the live site it is a top-edge layer on the footer CTA row: 210px tall,
- * stretched to the full row width (`preserveAspectRatio="none"`), flipped
- * vertically via `scaleY(-1)`, and filled white so it reads as the page
- * background curving down into the blue band. The first three paths are
- * translucent offsets that give the swoop its layered look.
+ * It sits as a top-edge layer on the footer CTA row: 210px tall, stretched to
+ * the full row width (`preserveAspectRatio="none"`) and flipped vertically via
+ * `scaleY(-1)`, so it reads as the page above curving down into the blue band.
+ * The first three paths are translucent offsets that give it its layered look.
+ *
+ * The fill has to match whatever sits directly above the footer or the shape
+ * shows a seam. The original hard-codes #ffffff because GeneratePress puts the
+ * page content on a white `.inside-article`; here it tracks the page
+ * background token instead, so the two stay in sync if that colour changes.
  */
-export function SwoopDivider({ className = "" }: { className?: string }) {
+export function SwoopDivider({
+  className = "",
+  fillClassName = "fill-asa-page",
+}: {
+  className?: string;
+  /** Tailwind `fill-*` class naming the colour of the section above. */
+  fillClassName?: string;
+}) {
   return (
     <div
       className={`pointer-events-none absolute inset-0 z-[1] overflow-hidden ${className}`}
@@ -17,7 +28,7 @@ export function SwoopDivider({ className = "" }: { className?: string }) {
         role="presentation"
         viewBox="0 0 1000 345.15"
         preserveAspectRatio="none"
-        className="absolute top-0 left-0 block h-[210px] w-full -scale-y-100 fill-white"
+        className={`absolute top-0 left-0 block h-[210px] w-full -scale-y-100 ${fillClassName}`}
       >
         <g>
           <path

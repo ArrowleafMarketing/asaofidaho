@@ -4,15 +4,20 @@ import Image from "next/image";
 import { useEffect, useReducer } from "react";
 
 /**
- * The homepage hero: Beaver Builder's background slideshow on row
+ * The homepage hero: Beaver Builder's background slideshow from row
  * 601c4d99a732b. Config lifted verbatim from the layout JS —
  * `autoPlay: true, speed: 3000, transition: 'fade', transitionDuration: 1,
  * crop: true`, i.e. each photo holds for 3s then cross-fades over 1s, cropped
- * to cover the row.
+ * to cover the band.
  *
- * The row's height comes from a UABB spacer (node 601c4ea5bd485):
- * 500px desktop / 400px tablet / 200px phone, plus the module's own 20px
- * margins and the row's 20px padding — so the band measures 580 / 480 / 280px.
+ * Height comes from a UABB spacer (node 601c4ea5bd485): 500px desktop /
+ * 400px tablet / 200px phone, plus the module's 20px margins and the row's
+ * 20px padding — 580 / 480 / 280px in total.
+ *
+ * `children` render bottom-anchored *inside* that area, which is where the
+ * blue mission band now sits. It is a normal flow child rather than an
+ * absolute overlay, so on narrow screens it can grow past the minimum height
+ * instead of spilling out of it.
  */
 
 const SLIDES = [
@@ -33,7 +38,7 @@ const SLIDES = [
 const HOLD_MS = 3000;
 const FADE_MS = 1000;
 
-export function HeroSlideshow() {
+export function HeroSlideshow({ children }: { children?: React.ReactNode }) {
   const [index, next] = useReducer((i: number) => (i + 1) % SLIDES.length, 0);
 
   useEffect(() => {
@@ -46,7 +51,7 @@ export function HeroSlideshow() {
   }, [next]);
 
   return (
-    <section className="relative overflow-hidden px-5 py-5">
+    <section className="relative overflow-hidden">
       {SLIDES.map((slide, i) => (
         <Image
           key={slide.src}
@@ -69,8 +74,9 @@ export function HeroSlideshow() {
         aria-hidden="true"
       />
 
-      {/* The spacer module (500/400/200px) plus its own 20px margins. */}
-      <div className="relative mx-auto my-5 h-[500px] w-full max-w-(--container-row) max-[992px]:h-[400px] max-md:h-[200px]" />
+      <div className="relative flex min-h-[580px] flex-col justify-end max-[992px]:min-h-[480px] max-md:min-h-[280px]">
+        {children}
+      </div>
     </section>
   );
 }

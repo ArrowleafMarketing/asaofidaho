@@ -123,16 +123,28 @@ becomes a problem.
 carries `data-happyforms-required`), even though no asterisk is shown. Worth relaxing —
 requiring a phone number and company name costs enquiries.
 
-**3. The JOIN TODAY button overlaps the mission text by 10px.** That is what the live CSS
-computes: the paragraph's bottom margin is zeroed and the button's module has
-`margin-top: -10px`. It reads as a bug rather than a design choice, and it likely appeared
-when Beaver Builder changed its rich-text margin rules. Compare against the live site — if
-you want it fixed, change `-mt-2.5` to `mt-5` in [page.tsx](src/app/page.tsx).
-
-**4. Sponsor logos differed between desktop and mobile.** Desktop showed the current ISG
+**3. Sponsor logos differed between desktop and mobile.** Desktop showed the current ISG
 artwork; the separate mobile row was never updated and still showed a 2021 Graphic Zen logo.
 This build uses the current desktop pair everywhere. If Graphic Zen is still a sponsor, add
 them back in [leadership.ts](src/data/leadership.ts).
+
+---
+
+## Deliberate departures from the original's layout
+
+Requested after the first pass, so they will not match the live site:
+
+- **The mission band sits inside the hero**, bottom-anchored over the slideshow, rather than
+  as a separate band below it. It is a flow child, not an absolute overlay, so on narrow
+  screens it grows past the hero's minimum height instead of spilling out.
+- **The header is 12px shorter** — 12px of vertical padding instead of the original's 20px.
+- **The JOIN TODAY button no longer overlaps the mission text.** The original computes a
+  10px overlap (the paragraph's bottom margin is zeroed while the button's module has
+  `margin-top: -10px`); this uses the standard 20px module margin.
+- **The swoop divider is filled `#f7f8f9`** to meet the section above it. The original fills
+  it white because GeneratePress puts page content on a white `.inside-article`; this build
+  leaves content on the gray body, so the swoop tracks that instead. It reads from the
+  `--color-asa-page` token, so the two stay in sync if that colour changes.
 
 ---
 

@@ -45,36 +45,45 @@ export default function HomePage() {
       <Header variant="overlay" />
 
       <main id="content" className="flex-1">
-        <HeroSlideshow />
+        {/*
+          The mission band (row 601c4fb452367) now sits bottom-anchored inside
+          the hero rather than below it, so the blue reads as part of the hero
+          area. The slideshow shows above it.
+        */}
+        <HeroSlideshow>
+          <div className="bg-asa-blue px-5 pt-2.5">
+            <div className="mx-auto flex max-w-(--container-wide) flex-col">
+              {/* rich-text 601c4fdc6be98 — margin-bottom overridden to 0 */}
+              <div className="mx-5 mt-5 mb-0">
+                <p className="mb-0 text-center font-heading text-[22px] font-semibold uppercase text-white">
+                  &#8220;Better Construction Through Fair
+                  Construction&#8221;&#8212;The American Subcontractors
+                  Association promotes and protects the rights and interests of
+                  subcontractors and suppliers by building strength in community
+                  through education, legislation, networking and professional
+                  growth.
+                </p>
+              </div>
 
-        {/* ---- mission band (row 601c4fb452367) ---- */}
-        <section className="bg-asa-blue px-5 pt-2.5">
-          <div className="mx-auto flex max-w-(--container-wide) flex-col">
-            {/* rich-text 601c4fdc6be98 — margin-bottom overridden to 0 */}
-            <div className="mx-5 mt-5 mb-0">
-              <p className="mb-0 text-center font-heading text-[22px] font-semibold uppercase text-white">
-                &#8220;Better Construction Through Fair
-                Construction&#8221;&#8212;The American Subcontractors
-                Association promotes and protects the rights and interests of
-                subcontractors and suppliers by building strength in community
-                through education, legislation, networking and professional
-                growth.
-              </p>
-            </div>
-
-            {/* button p9lwen30fg1x — margin-top -10px, 20px below 768px */}
-            <div className="mx-5 -mt-2.5 mb-5 text-center max-md:mt-5">
-              <a
-                href={site.joinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bb-button btn-join"
-              >
-                JOIN TODAY
-              </a>
+              {/*
+                button p9lwen30fg1x. The original sets margin-top:-10px against
+                a paragraph whose bottom margin is zeroed, so the button
+                overlaps the last line of the mission statement. Using the
+                standard 20px module margin here instead, per the client.
+              */}
+              <div className="m-5 text-center">
+                <a
+                  href={site.joinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bb-button btn-join"
+                >
+                  JOIN TODAY
+                </a>
+              </div>
             </div>
           </div>
-        </section>
+        </HeroSlideshow>
 
         {/* ---- leadership / sponsors / contact (row 601c8438b8555) ---- */}
         {/*
