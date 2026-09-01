@@ -1,26 +1,388 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Design tokens extracted from the original WordPress build
+ * (GeneratePress 3.6 + Beaver Builder 2.10 + Ultimate Addons / PowerPack).
+ * Values are the literal ones the live site computes — do not "round" them.
+ */
+@theme {
+  /* Brand blues */
+  --color-asa-blue: #2b7ad9; /* tagline band, footer overlay base */
+  --color-asa-blue-dark: #00428e; /* copyright bar, CTA text, social chips */
+  --color-asa-blue-light: #32aaff; /* contact column panel */
+  --color-asa-navy: #000759; /* JOIN TODAY hover fill */
+  --color-asa-navy-deep: #00004d; /* JOIN TODAY hover border */
+  --color-asa-cta-hover: #d1ebff; /* CONTACT US hover fill */
+  --color-asa-social-hover: #7fa1c7;
+  --color-asa-card: rgba(71, 184, 255, 0.29); /* member infobox fill */
+
+  /* Links / nav */
+  --color-asa-link: #1e73be;
+  --color-asa-link-hover: #38b7ed;
+  --color-asa-nav-current: #7a8896;
+  --color-asa-nav-bg: #fafbfb;
+  --color-asa-nav-overlay-link: #110000; /* transparent header (home) */
+  --color-asa-nav-overlay-hover: #1e72bd;
+
+  /* Surfaces & text */
+  --color-asa-page: #f7f8f9;
+  --color-asa-ink: #222222;
+  --color-asa-muted: #8c8c8c;
+  --color-asa-field-bg: #fafafa;
+  --color-asa-field-border: #cccccc;
+  --color-asa-field-border-focus: #bfbfbf;
+
+  /* Typography */
+  --font-heading: var(--font-oswald), Oswald, sans-serif;
+  --font-body: var(--font-roboto), Roboto, sans-serif;
+
+  /* Layout widths used by the original rows */
+  --container-row: 1100px; /* .fl-row-fixed-width */
+  --container-wide: 1350px; /* tagline row content */
+  --container-page: 1200px; /* .grid-container / member + why-join rows */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ------------------------------------------------------------------ *
+ * Base element styles — mirrors GeneratePress' generated stylesheet.
+ * Kept inside @layer base so Tailwind utilities can override them.
+ * ------------------------------------------------------------------ */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: var(--color-asa-page);
+    color: var(--color-asa-ink);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    font-size: 17px;
+  }
+
+  a {
+    color: var(--color-asa-link);
+    text-decoration: none;
+  }
+
+  a:hover,
+  a:focus,
+  a:active {
+    color: #000000;
+  }
+
+  /*
+   * GeneratePress fades links and buttons over 100ms above the mobile
+   * breakpoint, then disables every transition at 768px and below.
+   */
+  a,
+  button,
+  input {
+    transition:
+      color 0.1s ease-in-out,
+      background-color 0.1s ease-in-out;
+  }
+
+  @media (max-width: 768px) {
+    a,
+    body,
+    button,
+    input,
+    select,
+    textarea {
+      transition: all 0s ease-in-out;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0 0 20px;
+    font-weight: 400;
+    text-transform: none;
+  }
+
+  /* Only h1–h3 tighten their leading in GeneratePress; h4–h6 inherit 1.5. */
+  h1,
+  h2,
+  h3 {
+    line-height: 1.2em;
+  }
+
+  h1 {
+    font-size: 42px;
+  }
+  h2 {
+    font-size: 35px;
+  }
+  h3 {
+    font-size: 29px;
+  }
+  h4 {
+    font-size: 24px;
+  }
+  h5 {
+    font-size: 20px;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 31px;
+    }
+    h2 {
+      font-size: 27px;
+    }
+    h3 {
+      font-size: 24px;
+    }
+    h4 {
+      font-size: 22px;
+    }
+    h5 {
+      font-size: 19px;
+    }
+  }
+
+  p {
+    margin: 0 0 1.5em;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    color: #666666;
+    background-color: var(--color-asa-field-bg);
+    border: 1px solid var(--color-asa-field-border);
+  }
+
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="tel"]:focus,
+  textarea:focus {
+    color: #666666;
+    background-color: #ffffff;
+    border-color: var(--color-asa-field-border-focus);
+    outline: none;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* ---------------------------------------------------------------- *
+   * Beaver Builder heading treatment: every builder heading on this
+   * site is Oswald 700 uppercase with its own padding zeroed. Vertical
+   * rhythm comes from the surrounding module margin, so callers set
+   * their own margins.
+   * ---------------------------------------------------------------- */
+  .bb-heading {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0;
+  }
+
+  /* Rich-text blocks: the last child loses its bottom margin, as in BB. */
+  .bb-richtext > :last-child {
+    margin-bottom: 0;
+  }
+
+  .bb-richtext strong,
+  .bb-richtext b {
+    font-weight: 700;
+  }
+
+  /* .fl-button base: 16px / 18px line-height / 12px 24px / radius 4px */
+  .bb-button {
+    display: inline-block;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 18px;
+    padding: 12px 24px;
+    text-decoration: none;
+    text-shadow: none;
+  }
+
+  /* JOIN TODAY (node p9lwen30fg1x) */
+  .btn-join {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    background-color: #ffffff;
+    border: 1px solid #f3f3f3;
+    color: var(--color-asa-blue-dark);
+    transition: none;
+  }
+
+  .btn-join:hover,
+  .btn-join:focus {
+    background-color: var(--color-asa-navy);
+    border-color: var(--color-asa-navy-deep);
+    color: #ffffff;
+  }
+
+  .btn-join:active {
+    position: relative;
+    top: 1px;
+  }
+
+  /* CONTACT US (UABB creative button, node e9ns57hf4ucd) */
+  .btn-contact {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 4px;
+    padding: 12px 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: #ffffff;
+    color: var(--color-asa-blue-dark);
+    transition: all 200ms linear;
+  }
+
+  .btn-contact:hover,
+  .btn-contact:focus {
+    background: var(--color-asa-cta-hover);
+    color: #000000;
+  }
+
+  /* ---------------------------------------------------------------- *
+   * TablePress-style leadership rosters
+   * ---------------------------------------------------------------- */
+  .roster {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+  }
+
+  .roster td {
+    text-align: center;
+    vertical-align: top;
+    padding: 8px 6px;
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  .roster tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+
+  .roster td strong {
+    font-weight: 700;
+  }
+
+  /* Stack the two-up roster on phones, per tablepress-responsive-stack-phone. */
+  @media (max-width: 480px) {
+    .roster,
+    .roster tbody,
+    .roster tr,
+    .roster td {
+      display: block;
+      width: 100%;
+    }
+
+    .roster td:empty {
+      display: none;
+    }
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Nav links. GeneratePress replaces the whole `transition` property
+   * on these, so hover colour changes are instant — only line-height
+   * animates (during the sticky bar's 60px → 80px growth).
+   * ---------------------------------------------------------------- */
+  .nav-link {
+    transition: line-height 300ms ease;
+  }
+
+  /* ---------------------------------------------------------------- *
+   * Contact form fields — HappyForms' resolved styling
+   * ---------------------------------------------------------------- */
+  .hf-label {
+    display: inline-block;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #000000;
+  }
+
+  .hf-field {
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    border: 1px solid #dbdbdb;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 16px;
+    box-shadow: none;
+  }
+
+  .hf-field::placeholder {
+    color: #888888;
+  }
+
+  .hf-field:focus {
+    outline: 0;
+    border-color: #7aa4ff;
+    background-color: #ffffff;
+    box-shadow: inset 0 0 0 1px #7aa4ff;
+  }
+
+  .hf-field[aria-invalid="true"] {
+    border-color: #f23000;
+  }
+
+  .hf-submit {
+    padding: 12px 24px;
+    border: 1px solid transparent;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .hf-submit:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .screen-reader-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    border: 0;
+    word-wrap: normal !important;
+  }
+
+  .screen-reader-text:focus {
+    display: block;
+    top: 5px;
+    left: 5px;
+    width: auto;
+    height: auto;
+    clip-path: none;
+    z-index: 100000;
+    background-color: #ddd;
+    color: #444;
+    font-size: 1em;
+    padding: 15px 23px 14px;
+    text-decoration: none;
+  }
+
+  /* Parallax background: fixed attachment is a no-op on iOS, so fall back to
+     scroll there rather than shipping a broken jump. */
+  .bg-parallax {
+    background-attachment: fixed;
+  }
+
+  @media (hover: none) {
+    .bg-parallax {
+      background-attachment: scroll;
+    }
+  }
 }
