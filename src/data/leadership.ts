@@ -15,25 +15,23 @@ export type BoardMember = {
 
 /** tablepress-1 — rendered in two columns, filling left-to-right by row. */
 export const subcontractorBoard: BoardMember[] = [
-  { name: "Scott Tidwell", role: "President" },
-  { name: "Adam Roe", role: "Vice President" },
+  { name: "Adam Roe", role: "President" },
+  { name: "Russell Freeman", role: "Vice President" },
+  { name: "Scott Tidwell", role: "Immediate Past President" },
   { name: "Darcy Neidigh", role: "DeBest Plumbing, Inc." },
   { name: "Denise Alter", role: "D & A Glass Company, Inc." },
-  { name: "Chris Lombardo", role: "Forte Construction Services, Inc." },
   { name: "Nathan Miller", role: "M-L Masonry, Inc." },
   { name: "Brian Whipple", role: "Summit Wall Systems, Inc." },
-  { name: "Greg Eveland", role: "LKL Associates" },
   { name: "Tyler Stoller", role: "Sawtooth Caulking, Inc." },
-  { name: "Richard Stokes", role: "Precision Steel & Gypsum, Inc." },
   { name: "Brie Ghinazzi", role: "Merit Professional Coatings" },
-  { name: "Trace Leighton", role: "Leighton Enterprises, inc." },
-  { name: "Russell Freeman", role: "Desert Wall Systems" },
 ];
 
 /** tablepress-2 — a single column. */
 export const associateBoard: BoardMember[] = [
   { name: "Jenae Sexton", role: "Idaho Construction Bonding, LLC" },
   { name: "Eric Englund", role: "Markel Surety" },
+  { name: "Greg Eveland", role: "LKL Associates" },
+  { name: "Aaron Miller", role: "Northwest Safety & Risk Services, LLC" },
 ];
 
 export type Sponsor = {
