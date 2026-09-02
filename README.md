@@ -20,7 +20,7 @@ npm run lint
 | Route            | Source page                | Notes                                                 |
 | ---------------- | -------------------------- | ----------------------------------------------------- |
 | `/`              | Home (post 17)             | Hero slideshow, mission band, boards, sponsors, contact |
-| `/find-a-member` | Find a Member (post 22)    | 38 member cards in two columns                          |
+| `/find-a-member` | Find a Member (post 22)    | 29 member cards in two columns                          |
 | `/why-join`      | Why Join (post 24)         | Member-benefits copy                                    |
 | `/api/contact`   | HappyForms form 135        | Replaces `admin-ajax.php`                               |
 
@@ -50,11 +50,11 @@ src/
     Roster.tsx            TablePress-equivalent board tables
     Icons.tsx             Inlined GP / Font Awesome / PowerPack glyphs
   data/
-    members.ts            38 members, extracted from the live page
+    members.ts            29 current members (see README for the reconciliation)
     leadership.ts         Both boards + annual sponsors
   lib/
     site.ts               Phone, menu, social links, copyright
-public/wordpress-assets/  46 referenced images (all already present)
+public/wordpress-assets/  36 referenced images (4 new logos added 2026-09-02)
 ```
 
 ### Design tokens
@@ -171,21 +171,56 @@ Requested after the first pass, so they will not match the live site:
 Found while extracting the member directory. All are carried over as-is so nothing silently
 disappears — none is fixed in code.
 
-- **Boise Demolition** has a mangled line: `vega@boisedemolition.comtBoise Demolition`.
 - **Rodda Paint's** "Contact: Mike Royeton" links to `_wp_link_placeholder` — an unsaved
   WordPress link. Dropped here, since it goes nowhere.
-- **Western Wallboard**, **Brant Freeman & Associates** and **Leighton Enterprises** have no
-  website link; their cards render as plain blocks.
+- **Brant Freeman & Associates** and **Leighton Enterprises** have no website link; their
+  cards render as plain blocks.
 - **Precision Steel & Gypsum's** link is a Google search URL, not their site.
 - **Leighton Enterprises** uses a Leighton Motorsports logo.
 - **D & A Glass** and **D & A Door & Specialties** are separate members sharing one logo and
   one website.
-- Eight links are still `http://`, and eleven `tel:` hrefs don't match their displayed
+- Several links are still `http://`, and some `tel:` hrefs don't match their displayed
   number (e.g. `tel:2083661660` shown as `208-366-1660`) — harmless, but inconsistent.
 - **Card text colour is uneven** on the live site: company names render in link blue, while
   the four taglines render dark, because the nested-anchor bug reparents them out of the
   link. Reproduced faithfully; normalising it would be a one-line change in
   [MemberCard.tsx](src/components/MemberCard.tsx).
+
+### Member roster update — 2026-09-02
+
+Reconciled against a 29-company list the client emailed, with a contact email and phone for
+each. That email is the authority for phone numbers; **contact emails were intentionally not
+published on the cards** — the client's note framed them as something for internal outreach
+(Chad contacting members for the Subcontractor of the Month filming), not public site content.
+They're in the email thread if a card ever needs one added.
+
+**Removed (14, absent from the new list):** Steel Connections, Western Wallboard Systems, ISG
+Print & Embroidery, Rocky Mountain Rebar, Boise Demolition, ConDoc, Idaho Construction
+Bonding, WAFED Insurance Group, Liberty Mutual Surety, Cloverdale Plumbing, Mountainland
+Supply, LKL Associates, Color Craft Painting, PORTAPros.
+
+**Added (5, all new to the site):** Blueprint Specialties, Fully Promoted Idaho, H&E
+Advisors, Sherwin-Williams, Umpqua Bank. None had a logo on file, so each was sourced fresh
+and checked visually before use — Blueprint Specialties and H&E Advisors from their own
+sites, Sherwin-Williams from their brand CDN, Umpqua Bank from Wikimedia (umpquabank.com
+blocks scraping), and Fully Promoted from `fp.png`, a leftover in `wordpress-assets/` from
+the original site that turned out to be their franchise mark.
+
+**Phone numbers changed (6):** Associated Insurance Services, Franz Witte Landscape, Markel
+Surety, Merit Professional Coatings, Rodda Paint, The Hartwell Corporation. Everywhere else
+the new list's digits matched what was already on the card.
+
+**Worth confirming, not guessed at:**
+- **Idaho Construction Bonding** (the Executive Director's own company) and **LKL Associates**
+  (an associate-board member's company) are both absent from the new list and were removed
+  per the literal instruction — but both belong to people still actively on the boards, so
+  this may be an oversight in the list rather than an intentional drop.
+- **Desert Sage Wall Systems'** card still reads "Contact: Russell Freeman," but the new list
+  gives `frank@desertsagewallsystems.com` as the contact email — possibly a change to
+  someone named Frank. Left as-is rather than guessing a last name from an email prefix.
+- **Fully Promoted Idaho** has no website link on its card: `fpidaho.com` resolves but serves
+  a TLS certificate for a different domain (`*.squarespace.com`), so linking it would send
+  visitors to a browser security warning. Worth a look at their DNS/hosting setup.
 
 ---
 

@@ -1,11 +1,22 @@
 /**
- * The 38 members from /find-a-member/, extracted from the live page in the
- * order they appear. Each was a PowerPack infobox; `lines` holds the body text
- * under the company name, one entry per `<br>`-separated line, keeping any
- * `tel:`/`mailto:` link that line carried.
+ * The current members from /find-a-member/, reconciled against the roster
+ * the client emailed on 2026-09-02 (29 companies, with contact email/phone
+ * for each). That email is the source of truth for phone numbers; contact
+ * emails are intentionally not published on the cards — see the README.
  *
- * Data quirks from the source are preserved rather than silently corrected —
- * see the "Data issues worth cleaning up" section of the README.
+ * Fourteen companies from the original 38-member scrape were dropped because
+ * they're absent from the current list; five are new. Phone numbers were
+ * only changed where the new list's digits actually differ from what was on
+ * the card — most stayed the same, just reformatted from the source's
+ * digits-only style.
+ *
+ * Two things flagged for the client rather than guessed at — see the
+ * "Data issues worth cleaning up" section of the README:
+ *  - Desert Sage Wall Systems' contact may have changed from Russell Freeman
+ *    to someone named Frank (new email is frank@desertsagewallsystems.com).
+ *  - Idaho Construction Bonding (the Executive Director's own company) and
+ *    LKL Associates (an associate-board member's company) are both absent
+ *    from the new list and were removed — possibly an oversight.
  */
 
 export type MemberLine = { text: string; href?: string };
@@ -74,6 +85,9 @@ export const members: Member[] = [
     logoWidth: 272,
     logoHeight: 300,
     lines: [
+      // The client's new list gives frank@desertsagewallsystems.com as the
+      // contact email — possibly a change from Russell Freeman. Left as-is
+      // pending confirmation; see the file-level note above.
       { text: "Contact: Russell Freeman" },
       { text: "208-454-6461", href: "tel:208-454-6461" },
     ],
@@ -88,17 +102,6 @@ export const members: Member[] = [
     lines: [
       { text: "Contact: Adam Roe" },
       { text: "208-323-8443", href: "tel:208-323-8443" },
-    ],
-  },
-  {
-    column: 0,
-    name: "Steel Connections Inc",
-    href: "http://www.steelconnectionsinc.com",
-    logo: "/wordpress-assets/steel.png",
-    logoWidth: 272,
-    logoHeight: 300,
-    lines: [
-      { text: "208-672-1014", href: "tel:208-672-1014" },
     ],
   },
   {
@@ -133,7 +136,8 @@ export const members: Member[] = [
     logoHeight: 300,
     lines: [
       { text: "Contact: Eric Englund" },
-      { text: "971-377-3150", href: "tel:(971) 377-3150" },
+      // Updated from (971) 377-3150 per the client's 2026-09-02 list.
+      { text: "503-703-1283", href: "tel:503-703-1283" },
     ],
   },
   {
@@ -145,18 +149,8 @@ export const members: Member[] = [
     logoHeight: 300,
     lines: [
       { text: "Contact: Clint Paskewitz, CRA" },
-      { text: "208-955-8180", href: "tel:(208) 955-8180" },
-    ],
-  },
-  {
-    column: 0,
-    name: "Western Wallboard Systems, Inc.",
-    logo: "/wordpress-assets/ww.png",
-    logoWidth: 322,
-    logoHeight: 322,
-    lines: [
-      { text: "Contact: Greg Herman" },
-      { text: "208-409-8354", href: "tel:(208) 409-8354" },
+      // Updated from 208-955-8180 per the client's 2026-09-02 list.
+      { text: "208-336-7733", href: "tel:208-336-7733" },
     ],
   },
   {
@@ -168,7 +162,8 @@ export const members: Member[] = [
     logoHeight: 322,
     lines: [
       { text: "Contact: Seneca Hull" },
-      { text: "208-412-5467", href: "tel:208-412-5467" },
+      // Updated from 208-412-5467 per the client's 2026-09-02 list.
+      { text: "208-853-0808", href: "tel:208-853-0808" },
     ],
   },
   {
@@ -178,7 +173,7 @@ export const members: Member[] = [
     logoWidth: 322,
     logoHeight: 322,
     lines: [
-      { text: "1-208-402-8091", href: "tel:1-208-402-8091" },
+      { text: "208-402-8091", href: "tel:208-402-8091" },
     ],
   },
   {
@@ -195,25 +190,14 @@ export const members: Member[] = [
   },
   {
     column: 0,
-    name: "ISG Print & Embroidery",
-    href: "https://isgprint.com/",
-    logo: "/wordpress-assets/isg-logo_1.png",
-    logoWidth: 400,
-    logoHeight: 248,
-    lines: [
-      { text: "Contact: Emily Carpenter" },
-      { text: "1-208-908-0107", href: "tel:1-208-908-0107" },
-    ],
-  },
-  {
-    column: 0,
     name: "Merit Professional Coatings",
     href: "https://meritnow.com/",
     logo: "/wordpress-assets/merit-logo.png",
     logoWidth: 300,
     logoHeight: 109,
     lines: [
-      { text: "208-501-5143", href: "tel:208-501-5143" },
+      // Updated from 208-501-5143 per the client's 2026-09-02 list.
+      { text: "435-531-3191", href: "tel:435-531-3191" },
     ],
   },
   {
@@ -224,45 +208,9 @@ export const members: Member[] = [
     logoWidth: 257,
     logoHeight: 153,
     lines: [
-      // Original href was "_wp_link_placeholder" — an unsaved WordPress link
-      // that resolves to a 404. Dropped; the text is kept.
       { text: "Contact: Mike Royeton" },
-      { text: "208-446-7372", href: "tel:208-446-7372" },
-    ],
-  },
-  {
-    column: 0,
-    name: "Rocky Mountain Rebar",
-    href: "https://www.rockymtnrebar.com/",
-    logo: "/wordpress-assets/Logo-RMR.jpg",
-    logoWidth: 1280,
-    logoHeight: 792,
-    lines: [
-      { text: "Contact: Kelly Foster" },
-      { text: "(208) 254-0676", href: "tel:(208) 254-0676" },
-    ],
-  },
-  {
-    column: 0,
-    name: "Boise Demolition",
-    href: "https://boisedemolition.com/",
-    logo: "/wordpress-assets/rsw_1160.webp",
-    logoWidth: 1160,
-    logoHeight: 1536,
-    lines: [
-      { text: "Contact: Yadi Vega" },
-      { text: "vega@boisedemolition.comtBoise Demolition", href: "mailto:vega@boisedemolition.com" },
-    ],
-  },
-  {
-    column: 1,
-    name: "ConDoc",
-    href: "https://www.condoc.com/",
-    logo: "/wordpress-assets/condoc3.png",
-    logoWidth: 272,
-    logoHeight: 300,
-    lines: [
-      { text: "Contact: Shavonna Case" },
+      // Updated from 208-446-7372 per the client's 2026-09-02 list.
+      { text: "208-443-7372", href: "tel:208-443-7372" },
     ],
   },
   {
@@ -300,19 +248,6 @@ export const members: Member[] = [
   },
   {
     column: 1,
-    name: "Idaho Construction Bonding",
-    href: "http://www.icbcompany.com",
-    logo: "/wordpress-assets/ICB-logo-vertical-01.png",
-    logoWidth: 272,
-    logoHeight: 300,
-    lines: [
-      { text: "Contact: Jenae Sexton" },
-      { text: "208-921-4546", href: "tel:208-921-4546" },
-      { text: "BREAK THE MOLD!" },
-    ],
-  },
-  {
-    column: 1,
     name: "D & A Door & Specialties, Inc.",
     href: "https://www.daglass.net",
     logo: "/wordpress-assets/d-and-a.png",
@@ -324,18 +259,6 @@ export const members: Member[] = [
   },
   {
     column: 1,
-    name: "WAFED Insurance Group dba HD Insurance",
-    href: "https://www.wafdinsurancegroup.com/",
-    logo: "/wordpress-assets/wafd.png",
-    logoWidth: 272,
-    logoHeight: 300,
-    lines: [
-      { text: "Contact: Heidi Reeder" },
-      { text: "208-344-6565", href: "tel:208-344-6565" },
-    ],
-  },
-  {
-    column: 1,
     name: "Advanced Heating and Cooling",
     href: "https://advancedheatingandcooling.com/",
     logo: "/wordpress-assets/advanced.png",
@@ -343,18 +266,6 @@ export const members: Member[] = [
     logoHeight: 300,
     lines: [
       { text: "208-412-9968", href: "tel:208-412-9968" },
-    ],
-  },
-  {
-    column: 1,
-    name: "Liberty Mutual Surety",
-    href: "https://www.libertymutual.com/insurance-agent/idaho/idaho-falls-0240",
-    logo: "/wordpress-assets/liberty.png",
-    logoWidth: 272,
-    logoHeight: 300,
-    lines: [
-      { text: "Contact: Craig Dunbar, MBA, AFSB" },
-      { text: "208-386-0885", href: "tel:208-386-0885" },
     ],
   },
   {
@@ -371,29 +282,6 @@ export const members: Member[] = [
   },
   {
     column: 1,
-    name: "Cloverdale Plumbing Company",
-    href: "https://www.cloverdaleplumbing.com/",
-    logo: "/wordpress-assets/cloverdale-logo.png",
-    logoWidth: 322,
-    logoHeight: 322,
-    lines: [
-      { text: "208-376-1901", href: "tel:(208) 376-1901" },
-    ],
-  },
-  {
-    column: 1,
-    name: "Mountainland Supply",
-    href: "https://www.mountainlandsupply.com/",
-    logo: "/wordpress-assets/mountain-land.png",
-    logoWidth: 322,
-    logoHeight: 322,
-    lines: [
-      { text: "Contact: Rich Walz" },
-      { text: "208-546-0201", href: "tel:208-546-0201" },
-    ],
-  },
-  {
-    column: 1,
     name: "The Hartwell Corporation",
     href: "https://www.thehartwellcorp.com/",
     logo: "/wordpress-assets/thc-logo.png",
@@ -401,7 +289,8 @@ export const members: Member[] = [
     logoHeight: 322,
     lines: [
       { text: "Contact: Brian Tucker" },
-      { text: "208-550-6064", href: "tel:208-550-6064" },
+      // Updated from 208-550-6064 per the client's 2026-09-02 list.
+      { text: "208-459-1678", href: "tel:208-459-1678" },
     ],
   },
   {
@@ -413,19 +302,7 @@ export const members: Member[] = [
     logoHeight: 116,
     lines: [
       { text: "Contact: Andy Roe" },
-      { text: "1-208-991-0567", href: "tel:1-208-991-0567" },
-    ],
-  },
-  {
-    column: 1,
-    name: "LKL Associates, Inc.",
-    href: "https://www.lklassociates.com/",
-    logo: "/wordpress-assets/lkl.png",
-    logoWidth: 300,
-    logoHeight: 274,
-    lines: [
-      { text: "Contact: Beau Frampton" },
-      { text: "1-208-494-1500", href: "tel:1-208-494-1500" },
+      { text: "208-991-0567", href: "tel:208-991-0567" },
     ],
   },
   {
@@ -443,26 +320,59 @@ export const members: Member[] = [
   },
   {
     column: 1,
-    name: "Color Craft Painting",
-    href: "https://www.colorcraftpaint.com/",
-    logo: "/wordpress-assets/color-craft-logo.jpg",
-    logoWidth: 205,
-    logoHeight: 126,
+    name: "Blueprint Specialties",
+    href: "https://bpsboise.com/",
+    logo: "/wordpress-assets/blueprint-specialties-logo.png",
+    logoWidth: 300,
+    logoHeight: 119,
     lines: [
-      { text: "Contact: Jeff Barnes" },
-      { text: "208-860-4685", href: "tel:208-860-4685" },
+      { text: "208-377-0294", href: "tel:208-377-0294" },
     ],
   },
   {
     column: 1,
-    name: "PORTAPros",
-    href: "https://www.portapros.com/",
-    logo: "/wordpress-assets/porta-pros-logo.jpg",
-    logoWidth: 230,
-    logoHeight: 78,
+    name: "Fully Promoted Idaho",
+    // No href: fpidaho.com's TLS certificate doesn't match the domain
+    // (it's parked on Squarespace with someone else's cert) — flagged for
+    // the client rather than linking somewhere broken.
+    logo: "/wordpress-assets/fp.png",
+    logoWidth: 322,
+    logoHeight: 322,
     lines: [
-      { text: "Contact: Taelor Preheim" },
-      { text: "(208) 467-0089", href: "tel:(208) 467-0089" },
+      { text: "208-322-2222", href: "tel:208-322-2222" },
+    ],
+  },
+  {
+    column: 1,
+    name: "H&E Advisors",
+    href: "https://haeadvisors.cpa/",
+    logo: "/wordpress-assets/he-advisors-logo.avif",
+    logoWidth: 614,
+    logoHeight: 312,
+    lines: [
+      { text: "208-990-3223", href: "tel:208-990-3223" },
+    ],
+  },
+  {
+    column: 1,
+    name: "Sherwin-Williams",
+    href: "https://www.sherwin-williams.com/",
+    logo: "/wordpress-assets/sherwin-williams-logo.png",
+    logoWidth: 262,
+    logoHeight: 88,
+    lines: [
+      { text: "208-860-5335", href: "tel:208-860-5335" },
+    ],
+  },
+  {
+    column: 1,
+    name: "Umpqua Bank",
+    href: "https://www.umpquabank.com/",
+    logo: "/wordpress-assets/umpqua-bank-logo.png",
+    logoWidth: 500,
+    logoHeight: 85,
+    lines: [
+      { text: "208-296-9350", href: "tel:208-296-9350" },
     ],
   },
 ];
