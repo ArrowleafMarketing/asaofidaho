@@ -14,7 +14,8 @@
  * "Data issues worth cleaning up" section of the README:
  *  - Desert Sage Wall Systems' contact may have changed from Russell Freeman
  *    to someone named Frank (new email is frank@desertsagewallsystems.com).
- *  - Idaho Construction Bonding (the Executive Director's own company) and
+ *  - Idaho Construction Bonding (Jenae Sexton's company; she's now an
+ *    associate-board member rather than Executive Director) and
  *    LKL Associates (an associate-board member's company) are both absent
  *    from the new list and were removed — possibly an oversight.
  */

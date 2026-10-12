@@ -62,6 +62,8 @@ export function Footer() {
               </strong>
               <br />
               <em>{site.executiveDirector.title}</em>
+              <br />
+              {site.executiveDirector.company}
             </p>
           </div>
 

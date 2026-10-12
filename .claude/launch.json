@@ -4,13 +4,23 @@
     {
       "name": "asaofidaho-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "port": 3000
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "port": 3000,
+      "autoPort": true
     },
     {
       "name": "asaofidaho-prod",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "start", "--", "--port", "3100"],
+      "runtimeArgs": [
+        "run",
+        "start",
+        "--",
+        "--port",
+        "3100"
+      ],
       "port": 3100
     }
   ]

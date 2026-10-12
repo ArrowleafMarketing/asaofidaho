@@ -26,7 +26,7 @@ npm run lint
 
 Three nav items are external and unchanged: **Join Today** (members.asaonline.com),
 **Advocacy** (a Google Doc) and **Register for Events** (Constant Contact). The footer's
-**Contact Us** button is now a `mailto:` to `asaofidaho@gmail.com`, replacing the original's
+**Contact Us** button is now a `mailto:` to `alex@denaliexecservices.com`, replacing the original's
 link to subcontractorsidaho.com.
 
 ### Layout
@@ -104,7 +104,7 @@ back to `scroll` on touch devices instead of jumping.
 
 ## Needs a decision before launch
 
-**1. The contact form needs an email provider.** Enquiries go to `asaofidaho@gmail.com`
+**1. The contact form needs an email provider.** Enquiries go to `alex@denaliexecservices.com`
 (set in [site.ts](src/lib/site.ts), overridable with `CONTACT_TO_EMAIL`). The endpoint
 validates, blocks the honeypot and sends — but no provider is configured yet, so it
 currently returns an explicit "not connected yet" error rather than silently dropping
@@ -211,7 +211,7 @@ Surety, Merit Professional Coatings, Rodda Paint, The Hartwell Corporation. Ever
 the new list's digits matched what was already on the card.
 
 **Worth confirming, not guessed at:**
-- **Idaho Construction Bonding** (the Executive Director's own company) and **LKL Associates**
+- **Idaho Construction Bonding** (Jenae Sexton's company — former Executive Director, still on the associate board) and **LKL Associates**
   (an associate-board member's company) are both absent from the new list and were removed
   per the literal instruction — but both belong to people still actively on the boards, so
   this may be an oversight in the list rather than an intentional drop.
