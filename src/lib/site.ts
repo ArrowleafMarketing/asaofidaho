@@ -23,7 +23,7 @@ export const site = {
    */
   email: "alex@denaliexecservices.com",
   executiveDirector: {
-    name: "Alex",
+    name: "Alex Rhody",
     title: "Executive Director",
     company: "Denali Executive Services, LLC",
   },
