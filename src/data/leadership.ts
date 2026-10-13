@@ -66,4 +66,12 @@ export const sponsors: Sponsor[] = [
     width: 2621,
     height: 522,
   },
+  {
+    // Brand artwork recolored for the white page: yellow field → white, black kept.
+    name: "DEWALT",
+    href: "https://www.dewalt.com/",
+    logo: "/wordpress-assets/dewalt-logo.png",
+    width: 1132,
+    height: 311,
+  },
 ];
